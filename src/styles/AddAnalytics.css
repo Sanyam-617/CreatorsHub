@@ -1,0 +1,353 @@
+/* ─── ADD ANALYTICS PAGE ────────────────────────────────────────────────────── */
+
+.aa-page {
+  min-height: 100vh;
+  background-color: #0a0a0a;
+  color: #ffffff;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* ─── MAIN ──────────────────────────────────────────────────────────────────── */
+
+.aa-main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2.5rem;
+}
+
+/* ─── PAGE HEADER ───────────────────────────────────────────────────────────── */
+
+.aa-back-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 1.2rem;
+  display: block;
+  transition: color 0.2s;
+}
+
+.aa-back-btn:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.aa-page-header {
+  margin-bottom: 2.2rem;
+}
+
+.aa-page-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -1px;
+  margin-bottom: 0.4rem;
+}
+
+.aa-page-sub {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* ─── LAYOUT ────────────────────────────────────────────────────────────────── */
+
+.aa-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* ─── CARDS ─────────────────────────────────────────────────────────────────── */
+
+.aa-card {
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 1.8rem;
+  transition: border-color 0.2s, opacity 0.2s;
+}
+
+.aa-card-locked {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.aa-preview-card {
+  border-width: 1px;
+  border-style: solid;
+}
+
+.aa-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ─── STEP NUMBER ───────────────────────────────────────────────────────────── */
+
+.aa-step-num {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.4);
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.aa-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.2rem;
+}
+
+.aa-card-sub {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* ─── PLATFORM GRID ─────────────────────────────────────────────────────────── */
+
+.aa-platform-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+.aa-platform-btn {
+  background: #111111;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 11px;
+  padding: 1rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  position: relative;
+}
+
+.aa-platform-btn:hover:not(.active) {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: #161616;
+}
+
+.aa-plat-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.aa-plat-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.aa-platform-btn.active .aa-plat-label {
+  color: #ffffff;
+}
+
+.aa-plat-check {
+  font-size: 0.75rem;
+  font-weight: 700;
+  position: absolute;
+  top: 8px;
+  right: 10px;
+}
+
+/* ─── DATE ──────────────────────────────────────────────────────────────────── */
+
+.aa-date-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.aa-date-input {
+  background: #111111;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  color: #ffffff;
+  font-size: 0.95rem;
+  outline: none;
+  width: 100%;
+  max-width: 320px;
+  transition: border-color 0.2s;
+  color-scheme: dark;
+}
+
+.aa-date-input:focus {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.aa-date-input:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.aa-date-preview {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.35);
+  padding-left: 0.2rem;
+}
+
+/* ─── FIELDS ────────────────────────────────────────────────────────────────── */
+
+.aa-fields-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.aa-fields-two {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.aa-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.aa-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.aa-optional-tag {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.2);
+  text-transform: none;
+  letter-spacing: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  padding: 0.1rem 0.45rem;
+}
+
+.aa-input {
+  background: #111111;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 0.8rem 0.9rem;
+  color: #ffffff;
+  font-size: 0.95rem;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+
+.aa-input::placeholder {
+  color: rgba(255, 255, 255, 0.18);
+  font-size: 0.85rem;
+}
+
+.aa-input:focus {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.aa-input:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* hide number input arrows */
+.aa-input::-webkit-inner-spin-button,
+.aa-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.aa-input[type=number] { -moz-appearance: textfield; }
+
+/* ─── PREVIEW ───────────────────────────────────────────────────────────────── */
+
+.aa-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 1.4rem;
+}
+
+.aa-preview-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  gap: 1rem;
+}
+
+.aa-preview-row:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.aa-preview-label {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.35);
+  white-space: nowrap;
+}
+
+.aa-preview-val {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── SUBMIT ────────────────────────────────────────────────────────────────── */
+
+.aa-submit-btn {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.aa-submit-btn:hover {
+  opacity: 0.88;
+}
+
+.aa-submit-btn:active {
+  transform: scale(0.99);
+}
+
+/* ─── RESPONSIVE ────────────────────────────────────────────────────────────── */
+
+@media (max-width: 700px) {
+  .aa-main           { padding: 1.5rem 1rem; }
+  .aa-page-title     { font-size: 1.7rem; }
+  .aa-platform-grid  { grid-template-columns: repeat(2, 1fr); }
+  .aa-fields-grid    { grid-template-columns: repeat(2, 1fr); }
+  .aa-fields-two     { grid-template-columns: 1fr; }
+  .aa-preview-grid   { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 440px) {
+  .aa-fields-grid    { grid-template-columns: 1fr; }
+}
