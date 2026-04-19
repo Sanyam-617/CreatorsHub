@@ -1,0 +1,20 @@
+/* ─── CHART ───────────────────────────────────────────────────── */
+
+.chart-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.chart-empty-text {
+  color: rgba(255,255,255,0.3);
+  font-size: 14px;
+  margin-top: 16px;
+  text-align: center;
+}
