@@ -1,0 +1,448 @@
+/* ─── ANALYTICS LAYOUT ───────────────────────────────────── */
+
+/* BUG FIX: was `display: grid; grid-template-columns: var(--sidebar-width) 1fr`
+   but sidebar is position:fixed so it doesn't participate in grid flow.
+   That left a phantom 220px gap. Now just min-height so .main-content
+   (which has margin-left in Sidebar.css) handles the offset correctly. */
+.analytics-layout {
+  min-height: 100vh;
+  background: var(--bg-base);
+}
+
+.main-content {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+}
+
+/* ─── PAGE HEADER ───────────────────────────────────── */
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.page-header-left {
+  flex: 1;
+}
+
+.page-title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+  color: var(--text-primary);
+}
+
+.page-subtitle {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 0;
+}
+
+/* ─── LOADING STATE ───────────────────────────────────── */
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.error-state {
+  padding: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  text-align: center;
+}
+
+.error-state p {
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.an-btn-primary {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-default);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 200ms;
+}
+
+.an-btn-primary:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--border-hover);
+}
+
+/* ─── PLATFORM TABS ───────────────────────────────────── */
+
+.platform-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.platform-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 200ms;
+}
+
+.platform-tab.active {
+  background: rgba(var(--accent-color), 0.1);
+  border: 1px solid rgba(var(--accent-color), 0.3);
+  color: var(--accent-color);
+}
+
+.platform-tab:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+}
+
+.platform-handle {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* ─── ANALYTICS CONTENT ───────────────────────────────────── */
+
+.analytics-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ─── CHART CARD ───────────────────────────────────── */
+
+.chart-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.metric-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 1rem;
+}
+
+.metric-tab {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 8px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 200ms;
+}
+
+.metric-tab.active {
+  border-bottom: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  font-weight: 500;
+}
+
+.chart-type-toggle {
+  display: flex;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.type-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 8px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 200ms;
+}
+
+.type-btn.active {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+}
+
+/* ─── DATA TABLE ───────────────────────────────────── */
+
+.data-table-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 13px;
+}
+
+.data-table th {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 12px 12px;
+  text-align: right;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.data-table th:first-child {
+  text-align: left;
+}
+
+.data-table td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 12px 12px;
+  text-align: right;
+  transition: background 200ms;
+}
+
+.data-table td:first-child {
+  text-align: left;
+}
+
+.data-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.table-number {
+  font-variant-numeric: tabular-nums;
+}
+
+.table-date {
+  color: var(--text-secondary);
+}
+
+.table-engagement {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* BUG FIX: the original file had an unclosed rule here:
+     `.an-table tbody tr:hover td {`
+   with no closing brace, which caused the parser to treat everything
+   below it as part of that rule — breaking all subsequent selectors. */
+.an-table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.an-td-date {
+  color: rgba(255, 255, 255, 0.4) !important;
+  font-size: 0.8rem !important;
+}
+
+.an-eng-badge {
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+/* ─── FORECAST SECTION ───────────────────────────────────── */
+
+.forecast-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.forecast-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.r2-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid;
+}
+
+.forecast-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.forecast-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 16px;
+  position: relative;
+}
+
+.forecast-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 16px;
+  right: 16px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+  opacity: 0.7;
+}
+
+.forecast-week {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.forecast-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.forecast-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.forecast-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+}
+
+.forecast-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ─── PREDICTION SECTION ────────────────────────────────────────────────────── */
+
+.an-prediction-section {
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 1.6rem;
+  margin-bottom: 2rem;
+}
+
+.an-pred-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.85rem;
+}
+
+.an-pred-card {
+  background: #111111;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 11px;
+  padding: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.an-pred-week {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.an-pred-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.an-pred-label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.an-pred-val {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── RESPONSIVE ───────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .forecast-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .platform-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+
+  .metric-tabs {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 1024px) {
+  .an-pred-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .an-pred-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .an-metric-tabs {
+    gap: 0;
+  }
+}

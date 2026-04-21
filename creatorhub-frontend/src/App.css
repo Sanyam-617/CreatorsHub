@@ -1,0 +1,341 @@
+:root {
+  --bg-base: #0a0a0a;
+  --bg-card: #141414;
+  --bg-card-hover: #181818;
+  --bg-surface: #1e1e1e;
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.10);
+  --border-hover: rgba(255, 255, 255, 0.15);
+  --text-primary: rgba(255, 255, 255, 0.92);
+  --text-secondary: rgba(255, 255, 255, 0.45);
+  --text-tertiary: rgba(255, 255, 255, 0.25);
+  --color-yt: #ff4444;
+  --color-ig: #cc66ff;
+  --color-tw: #4da6ff;
+  --color-fb: #4466ff;
+  --color-success: #22c55e;
+  --color-danger: #ef4444;
+  --sidebar-width: 220px;
+  --max-content-width: 1280px;
+  --gutter: 2rem;
+}
+
+body {
+  background: var(--bg-base);
+  font-family: 'Inter', -apple-system, sans-serif;
+  color: var(--text-primary);
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── SHARED LAYOUT WRAPPERS ─────────────────────────────────────────────────
+   BUG FIX: these classes were used in JSX but never defined, causing no layout.
+   Sidebar is position:fixed so these just need min-height. The .main-content
+   class in Sidebar.css handles the margin-left offset.
+──────────────────────────────────────────────────────────────────────────── */
+
+.dashboard-layout,
+.analytics-layout,
+.platforms-layout {
+  min-height: 100vh;
+  background: var(--bg-base);
+}
+
+/* ─── SHARED PAGE HEADER ─────────────────────────────────────────────────────
+   BUG FIX: .page-header, .page-title, .page-subtitle were used in Dashboard.jsx
+   but only defined in Analytics.css (which Dashboard didn't import).
+   Moved here so all pages can use them.
+──────────────────────────────────────────────────────────────────────────── */
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.page-header-left {
+  flex: 1;
+}
+
+.page-title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+  color: var(--text-primary);
+}
+
+.page-subtitle {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+}
+
+/* ─── LIVE INDICATOR ─────────────────────────────────────────────────────────
+   BUG FIX: .live-indicator and .live-dot were used in Dashboard.jsx
+   but never defined anywhere.
+──────────────────────────────────────────────────────────────────────────── */
+
+.live-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding: 6px 12px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 100px;
+}
+
+.live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ─── SHARED CHART CARD STYLES ───────────────────────────────────────────────
+   Shared between Dashboard and Analytics
+──────────────────────────────────────────────────────────────────────────── */
+
+.chart-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 2rem;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.chart-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.platform-legend {
+  display: flex;
+  gap: 16px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ─── PLATFORM BREAKDOWN (Dashboard) ─────────────────────────────────────── */
+
+.platform-breakdown {
+  margin-top: 0;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.platform-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.platform-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 1.5rem;
+  transition: all 200ms;
+}
+
+.platform-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+}
+
+.platform-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.platform-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.platform-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.platform-name {
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: capitalize;
+  letter-spacing: -0.01em;
+  margin-bottom: 2px;
+}
+
+.platform-handle {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.platform-divider {
+  height: 1px;
+  background: linear-gradient(90deg, var(--border-subtle), transparent);
+  margin: 1rem 0;
+}
+
+.platform-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.platform-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: background 150ms;
+}
+
+.platform-stat:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.stat-label-small {
+  font-size: 10.5px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+}
+
+.stat-value-small {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* ─── SHARED LOADING / ERROR / EMPTY STATES ──────────────────────────────── */
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.error-state {
+  padding: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.empty-state {
+  padding: 40px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  text-align: center;
+}
+
+.empty-state h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.empty-state p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ─── STATS GRID ─────────────────────────────────────────────────────────── */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 640px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── SKELETON SHIMMER ───────────────────────────────────────────────────── */
+
+@keyframes shimmer {
+  from {
+    background-position: -800px 0;
+  }
+
+  to {
+    background-position: 800px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #1a1a1a 25%, #242424 50%, #1a1a1a 75%);
+  background-size: 1600px 100%;
+  animation: shimmer 1.6s infinite linear;
+  border-radius: 6px;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: scale(0.7);
+  }
+}

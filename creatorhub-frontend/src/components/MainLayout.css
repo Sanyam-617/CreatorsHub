@@ -1,0 +1,69 @@
+/* ─── MAIN LAYOUT ────────────────────────────────────────────────────────── */
+
+.app-layout {
+  min-height: 100vh;
+  background: var(--bg-base);
+}
+
+/* ─── GLOBAL HEADER ──────────────────────────────────────────────────────── */
+
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Left padding leaves room for the sidebar hamburger toggle (38px + 1rem gap) */
+  padding: 0 1.5rem 0 4.25rem;
+  background: rgba(10, 10, 10, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-subtle);
+  z-index: 999; /* Below sidebar toggle (1000) and sidebar panel (1100) */
+}
+
+.main-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.main-header-logo {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #4da6ff, #cc66ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.main-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-logout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.header-logout-btn:hover {
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.08);
+}
