@@ -1,16 +1,11 @@
 const admin = require("firebase-admin");
-const fs = require("fs");
-const path = require("path");
 
 if (!admin.apps.length) {
-    const serviceAccountPath = path.resolve(process.env.FIREBASE_ADMIN_SDK_PATH);
+    const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
-    if (!fs.existsSync(serviceAccountPath)) {
-        console.error(` Service account file not found at: ${serviceAccountPath}`);
-        process.exit(1);
-    }
+    // Fix private key formatting issue
+    serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
 
-    const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, "utf8"));
     admin.initializeApp({
         credential: admin.credential.cert(serviceAccount),
     });
