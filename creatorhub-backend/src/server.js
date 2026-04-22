@@ -23,7 +23,7 @@ console.log("AI ROUTE MOUNTED AT /api/ai");
 app.use("/api/auth",      require("./routes/authRoutes"));
 app.use("/api/platforms", require("./routes/platformroutes"));
 app.use("/api/analytics", require("./routes/analyticsroutes"));
-app.use("/api/ai", require("./routes/insightroutes"));
+app.use("/api/ai", require("./routes/ai"));
 app.use("/api/dashboard", require("./routes/dashboardroutes"));
 app.use("/api/upload",  require("./routes/uploadRoutes"));
 
