@@ -19,7 +19,7 @@ app.use(express.json());
 app.post("/test-login", (req, res) => {
   res.send("TEST LOGIN WORKS");
 });
-
+console.log("AI ROUTE MOUNTED AT /api/ai");
 app.use("/api/auth",      require("./routes/authRoutes"));
 app.use("/api/platforms", require("./routes/platformroutes"));
 app.use("/api/analytics", require("./routes/analyticsroutes"));
