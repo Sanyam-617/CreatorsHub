@@ -5,7 +5,7 @@ import { auth, provider } from "../firebase";
 import API from "../api/axios";
 import { useAuth } from "../context/AuthContext";
 import "../styles/Auth.css";
-
+console.log("ENV:", import.meta.env.VITE_API_URL);
 const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
