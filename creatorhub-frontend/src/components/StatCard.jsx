@@ -42,7 +42,7 @@ export function StatCard({
             </div>
 
             {/* Delta Badge */}
-            {delta !== undefined && (
+            {delta !== undefined && delta !== 0 && (
                 <div className="stat-delta" style={deltaStyle}>
                     {getDeltaIcon()}
                     <span>{Math.abs(delta)}{deltaLabel}</span>

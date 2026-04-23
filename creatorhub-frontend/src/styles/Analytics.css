@@ -1,9 +1,5 @@
 /* ─── ANALYTICS LAYOUT ───────────────────────────────────── */
 
-/* BUG FIX: was `display: grid; grid-template-columns: var(--sidebar-width) 1fr`
-   but sidebar is position:fixed so it doesn't participate in grid flow.
-   That left a phantom 220px gap. Now just min-height so .main-content
-   (which has margin-left in Sidebar.css) handles the offset correctly. */
 .analytics-layout {
   min-height: 100vh;
   background: var(--bg-base);
@@ -20,7 +16,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .page-header-left {
@@ -28,15 +24,15 @@
 }
 
 .page-title {
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
   margin-bottom: 4px;
   color: var(--text-primary);
 }
 
 .page-subtitle {
-  font-size: 12px;
+  font-size: 13px;
   color: rgba(255, 255, 255, 0.4);
   margin-bottom: 0;
 }
@@ -195,7 +191,7 @@
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: 14px;
-  padding: 20px;
+  padding: 1.5rem;
 }
 
 .section-title {
@@ -247,6 +243,10 @@
   background: rgba(255, 255, 255, 0.02);
 }
 
+.data-table tbody tr:nth-child(even) td {
+  background: rgba(255,255,255,0.02);
+}
+
 .table-number {
   font-variant-numeric: tabular-nums;
 }
@@ -260,10 +260,6 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* BUG FIX: the original file had an unclosed rule here:
-     `.an-table tbody tr:hover td {`
-   with no closing brace, which caused the parser to treat everything
-   below it as part of that rule — breaking all subsequent selectors. */
 .an-table tbody tr:hover td {
   background: rgba(255, 255, 255, 0.02);
 }
@@ -276,6 +272,32 @@
 .an-eng-badge {
   font-weight: 700;
   font-size: 0.82rem;
+}
+
+/* ─── VIEW MORE / LESS BUTTON ──────────────────────────── */
+
+.table-expand-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 10px 0;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 200ms;
+}
+
+.table-expand-btn:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--border-hover);
+  color: var(--accent, var(--text-primary));
 }
 
 /* ─── FORECAST SECTION ───────────────────────────────────── */

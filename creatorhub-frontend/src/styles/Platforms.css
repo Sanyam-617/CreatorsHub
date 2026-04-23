@@ -41,6 +41,11 @@
   grid-template-columns: 380px 1fr;
   gap: 1.5rem;
   align-items: start;
+  height: fit-content;
+}
+
+.main-content {
+  padding-bottom: 2rem;
 }
 
 /* ─── SECTION TITLES ────────────────────────────────────────────────────────── */
@@ -84,6 +89,7 @@
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 2rem;
+  min-height: unset;
 }
 
 /* ─── ADD PLATFORM CARD ───────────────────────────────────── */

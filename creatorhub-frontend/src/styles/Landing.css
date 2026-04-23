@@ -19,29 +19,50 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    background: rgba(10, 10, 10, 0.8);
+    background: rgba(10, 10, 10, 0.94);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border-subtle);
 }
 
+/* ── Logo — matches the header + sidebar exactly ── */
 .nav-logo {
     display: flex;
     align-items: center;
-    gap: 12px;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--text-primary);
+    gap: 10px;
+    text-decoration: none;
 }
 
+/* Square icon badge (mirrors sidebar-logo-icon) */
 .logo-icon {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #22c55e, #4ade80);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #22c55e, #16a34a);
-    border-radius: 10px;
-    color: white;
+    flex-shrink: 0;
+}
+
+.logo-icon-text {
+    color: #fff;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: -0.02em;
+}
+
+/* Gradient text wordmark (mirrors main-header-logo / sidebar-logo-text) */
+.nav-logo-text {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    background: linear-gradient(135deg, #22c55e 0%, #4ade80 50%, #16a34a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    user-select: none;
 }
 
 .nav-actions {
@@ -125,6 +146,7 @@
 }
 
 .gradient-text {
+    display: block;
     background: linear-gradient(135deg, #22c55e, #16a34a);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -516,13 +538,13 @@
         padding: 1rem;
     }
 
-    .nav-logo {
+    .nav-logo-text {
         font-size: 18px;
     }
 
     .logo-icon {
-        width: 36px;
-        height: 36px;
+        width: 28px;
+        height: 28px;
     }
 
     .hero {

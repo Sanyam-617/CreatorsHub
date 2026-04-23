@@ -2,6 +2,9 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 import MainLayout from "./components/MainLayout";
+// BUG FIX: removed unused `import Sidebar` — Sidebar is rendered inside
+// MainLayout and AddAnalytics directly; importing it here was dead code and
+// could cause tree-shaking / lint warnings.
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Register from "./pages/Register";

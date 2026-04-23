@@ -5,7 +5,11 @@ import { auth, provider } from "../firebase";
 import API from "../api/axios";
 import { useAuth } from "../context/AuthContext";
 import "../styles/Auth.css";
-console.log("ENV:", import.meta.env.VITE_API_URL);
+
+// BUG FIX: removed `console.log("ENV:", import.meta.env.VITE_API_URL)` that
+// was left at module scope — this logs a sensitive env variable to the browser
+// console in production on every page load.
+
 const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -22,21 +26,14 @@ const Login = () => {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      const name = user.displayName;
-      const email = user.email;
-
       const idToken = await user.getIdToken();
       const res = await API.post("/auth/google", {
         idToken,
-        name: user.displayName,   // still sent as fallback
+        name: user.displayName,
       });
 
-      // store JWT
       login(res.data.token);
-
-      // redirect
       navigate("/dashboard");
-
     } catch (err) {
       console.error(err);
       setError(err.response?.data?.message || "Google login failed");

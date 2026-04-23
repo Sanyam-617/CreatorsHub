@@ -20,9 +20,9 @@ const Landing = () => {
       <nav className="landing-nav">
         <div className="nav-logo">
           <div className="logo-icon">
-            <Activity size={24} />
+            <span className="logo-icon-text">CH</span>
           </div>
-          <span>CreatorHub</span>
+          <span className="nav-logo-text">CreatorHub</span>
         </div>
         <div className="nav-actions">
           <Link to="/login" className="nav-link">Sign In</Link>
@@ -50,7 +50,7 @@ const Landing = () => {
 
           <h1 className="hero-title">
             Understand Your
-            <span className="gradient-text">Social Impact</span>
+            <span className="gradient-text"> Social Impact</span>
           </h1>
 
           <p className="hero-subtitle">

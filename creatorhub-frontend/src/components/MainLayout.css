@@ -1,4 +1,4 @@
-/* ─── MAIN LAYOUT ────────────────────────────────────────────────────────── */
+/* ─── APP SHELL ──────────────────────────────────────────────────────────── */
 
 .app-layout {
   min-height: 100vh;
@@ -12,58 +12,233 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 56px;
+  height: 76px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* Left padding leaves room for the sidebar hamburger toggle (38px + 1rem gap) */
-  padding: 0 1.5rem 0 4.25rem;
-  background: rgba(10, 10, 10, 0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  padding: 0 1.75rem;
+  background: rgba(10, 10, 10, 0.94);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   border-bottom: 1px solid var(--border-subtle);
-  z-index: 999; /* Below sidebar toggle (1000) and sidebar panel (1100) */
+  z-index: 999;
 }
+
+/* ─── LEFT — logo + hamburger stacked ───────────────────────────────────── */
 
 .main-header-left {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  /* 10px gap between "CreatorHub" text and the hamburger icon below */
+  gap: 10px;
 }
 
 .main-header-logo {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #4da6ff, #cc66ff);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  user-select: none;
+  /* Fancy green gradient — rich emerald to lime */
+  background: linear-gradient(135deg, #22c55e 0%, #4ade80 50%, #16a34a 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.main-header-right {
+/* Pure icon hamburger — three lines, no text */
+.main-hamburger-btn {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
+  width: 28px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: opacity 180ms ease;
 }
 
-.header-logout-btn {
+.main-hamburger-btn:hover {
+  opacity: 0.7;
+}
+
+.main-hamburger-btn:active {
+  opacity: 0.45;
+}
+
+/* The three lines */
+.hamburger-line {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.65);
+  transition: background 180ms ease;
+}
+
+.main-hamburger-btn:hover .hamburger-line {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* ─── RIGHT — avatar + dropdown ─────────────────────────────────────────── */
+
+.main-header-right {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.header-avatar-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid rgba(74, 222, 128, 0.3);
+  background: rgba(34, 197, 94, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  border: 1px solid var(--border-subtle);
-  background: transparent;
-  color: var(--text-secondary);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 200ms ease;
+  padding: 0;
+  outline: none;
 }
 
-.header-logout-btn:hover {
-  color: #ef4444;
-  border-color: rgba(239, 68, 68, 0.3);
+.header-avatar-btn:hover {
+  border-color: rgba(74, 222, 128, 0.6);
+  background: rgba(34, 197, 94, 0.14);
+  transform: scale(1.06);
+}
+
+.header-avatar-btn:focus-visible {
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
+}
+
+.header-avatar-initials {
+  font-size: 13px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #22c55e, #4ade80);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.01em;
+  user-select: none;
+}
+
+/* ── Dropdown panel ── */
+.header-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 220px;
+  background: #111111;
+  border: 1px solid var(--border-default);
+  border-radius: 14px;
+  padding: 6px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.03);
+  animation: dropdownIn 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1300;
+}
+
+@keyframes dropdownIn {
+  from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+.dropdown-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}
+
+.dropdown-avatar-large {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #22c55e, #4ade80);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.dropdown-user-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.dropdown-user-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-user-email {
+  font-size: 11px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 4px 0;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 9px 12px;
+  border: none;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: all 150ms ease;
+}
+
+.dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+}
+
+.dropdown-item--danger {
+  color: rgba(239, 68, 68, 0.75);
+}
+
+.dropdown-item--danger:hover {
   background: rgba(239, 68, 68, 0.08);
+  color: #ef4444;
+}
+
+/* ─── MAIN CONTENT ───────────────────────────────────────────────────────── */
+
+.main-content {
+  margin-left: 0;
+  min-height: 100vh;
+  background: var(--bg-base);
+  overflow-x: hidden;
+  padding: var(--gutter);
+  padding-top: calc(76px + 1.5rem);
+  max-width: var(--max-content-width);
 }

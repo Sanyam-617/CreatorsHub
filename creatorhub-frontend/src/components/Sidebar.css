@@ -1,10 +1,10 @@
-/* ─── SIDEBAR ───────────────────────────────────────────────────────────── */
+/* ─── SIDEBAR PANEL ──────────────────────────────────────────────────────── */
 
 .sidebar {
     position: fixed;
     top: 0;
     left: 0;
-    width: var(--sidebar-width);
+    width: 220px;
     height: 100vh;
     background: #0d0d0d;
     border-right: 1px solid rgba(255, 255, 255, 0.06);
@@ -12,121 +12,108 @@
     flex-direction: column;
     z-index: 1100;
     transform: translateX(-100%);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .sidebar.open {
     transform: translateX(0);
 }
 
-/* ─── SIDEBAR OVERLAY ───────────────────────────────────────────────────── */
+/* ─── OVERLAY ────────────────────────────────────────────────────────────── */
 
 .sidebar-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(2px);
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
     z-index: 1050;
-    animation: fadeIn 0.25s ease;
+    animation: sidebarFadeIn 0.22s ease;
 }
 
-@keyframes fadeIn {
+@keyframes sidebarFadeIn {
     from { opacity: 0; }
     to   { opacity: 1; }
 }
 
-/* ─── HAMBURGER TOGGLE BUTTON ───────────────────────────────────────────── */
-
-.sidebar-toggle-btn {
-    position: fixed;
-    top: 1rem;
-    left: 1rem;
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: linear-gradient(135deg, rgba(77,166,255,0.15), rgba(204,102,255,0.15));
-    color: rgba(255, 255, 255, 0.85);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 1000;
-    transition: all 0.2s ease;
-}
-
-.sidebar-toggle-btn:hover {
-    background: linear-gradient(135deg, rgba(77,166,255,0.3), rgba(204,102,255,0.3));
-    border-color: rgba(255, 255, 255, 0.2);
-    color: #fff;
-    transform: scale(1.05);
-}
+/* ─── LOGO ROW ───────────────────────────────────────────────────────────── */
 
 .sidebar-logo {
     display: flex;
     align-items: center;
-    padding: 1.5rem 1rem;
+    gap: 10px;
+    padding: 1.4rem 1rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    cursor: pointer;
+    flex-shrink: 0;
 }
 
 .sidebar-logo-icon {
     width: 30px;
     height: 30px;
     border-radius: 6px;
-    background: linear-gradient(135deg, #4da6ff, #cc66ff);
+    /* Green gradient matching the header logo */
+    background: linear-gradient(135deg, #22c55e, #4ade80);
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     font-weight: 700;
     font-size: 12px;
-    margin-right: 10px;
     flex-shrink: 0;
 }
 
 .sidebar-logo-text {
-    font-size: 14px;
-    font-weight: 600;
-    color: white;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    /* Same fancy green gradient as the header */
+    background: linear-gradient(135deg, #22c55e 0%, #4ade80 50%, #16a34a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
+
+/* ─── NAV LINKS ──────────────────────────────────────────────────────────── */
 
 .sidebar-nav {
     flex: 1;
-    padding: 1rem 0.5rem;
+    padding: 0.75rem 0.5rem;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
 .sidebar-nav-item {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 9px 10px;
+    padding: 9px 12px;
     border-radius: 9px;
     color: rgba(255, 255, 255, 0.4);
     text-decoration: none;
-    font-size: 12.5px;
-    transition: all 150ms;
-    margin-bottom: 4px;
-    width: 100%;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 140ms, color 140ms;
     border: none;
     background: transparent;
     cursor: pointer;
     text-align: left;
+    width: 100%;
 }
 
 .sidebar-nav-item:hover {
     background: rgba(255, 255, 255, 0.05);
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.85);
 }
 
 .sidebar-nav-item.active {
-    background: rgba(255, 255, 255, 0.08);
-    color: #fff;
+    background: rgba(34, 197, 94, 0.08);
+    color: #4ade80;
 }
 
-/* ─── USER SECTION ───────────────────────────────────────────────────────── */
-/* BUG FIX: was flex-direction: column which stacked avatar/info/button
-   vertically with big gaps. Changed to row so they sit side by side. */
+/* ─── USER STRIP (display only — no logout button) ───────────────────────── */
 
 .sidebar-user {
     padding: 0.85rem 1rem;
@@ -135,33 +122,33 @@
     flex-direction: row;
     align-items: center;
     gap: 8px;
+    flex-shrink: 0;
 }
 
 .user-avatar {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #4da6ff, #cc66ff);
+    /* Green gradient on avatar too — consistent with brand colour */
+    background: linear-gradient(135deg, #22c55e, #4ade80);
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-weight: 600;
-    font-size: 13px;
+    font-weight: 700;
+    font-size: 12px;
     flex-shrink: 0;
 }
 
 .user-info {
     flex: 1;
     min-width: 0;
-    /* BUG FIX: allows text-overflow to work inside flex child */
 }
 
 .user-name {
     font-size: 11.5px;
     font-weight: 600;
-    color: white;
-    margin-bottom: 1px;
+    color: rgba(255, 255, 255, 0.88);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -169,42 +156,9 @@
 
 .user-email {
     font-size: 9.5px;
-    color: rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.3);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-
-.logout-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: none;
-    background: transparent;
-    color: rgba(255, 255, 255, 0.45);
-    cursor: pointer;
-    transition: all 150ms;
-    flex-shrink: 0;
-}
-
-.logout-btn:hover {
-    color: #ef4444;
-    background: rgba(239, 68, 68, 0.1);
-}
-
-/* ─── MAIN CONTENT OFFSET ────────────────────────────────────────────────── */
-/* Sidebar is now an overlay, so main-content uses full width.
-   Top padding accounts for the hamburger toggle button area. */
-
-.main-content {
-    margin-left: 0;
-    min-height: 100vh;
-    background: var(--bg-base);
-    overflow-x: hidden;
-    padding: var(--gutter);
-    padding-top: 4rem;
-    max-width: var(--max-content-width);
+    margin-top: 1px;
 }

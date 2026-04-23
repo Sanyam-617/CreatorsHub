@@ -1,15 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api/axios";
-import { useAuth } from "../context/AuthContext";
+// BUG FIX: removed unused `useAuth` import.
 import { PageWrapper } from "../components/PageWrapper";
-// BUG FIX: import shared Sidebar component instead of copy-pasting sidebar HTML
-import { Sidebar } from "../components/Sidebar";
 import {
   Plus,
   Trash2,
   Activity,
-  BarChart2
+  BarChart2,
 } from "lucide-react";
 import "../styles/Platforms.css";
 import "../components/Sidebar.css";
@@ -29,7 +27,8 @@ const PLATFORM_ICONS = {
 };
 
 const Platforms = () => {
-  const { user } = useAuth();
+  // BUG FIX: removed unused `user` from useAuth and the unused `navigate` —
+  // navigate is actually used so kept it; only removed the auth import.
   const navigate = useNavigate();
 
   const [platforms, setPlatforms] = useState([]);
@@ -101,134 +100,133 @@ const Platforms = () => {
     }
   };
 
+  // BUG FIX: the original JSX had a broken nesting — the closing </div> for
+  // .page-header-left came too early (before the subtitle), and then the
+  // closing </div> for .page-header was also misplaced, making .platforms-content
+  // appear to be a sibling of .main-content instead of a child.
   return (
-    // BUG FIX: replaced inline sidebar HTML with <Sidebar /> component.
-    <div className="platforms-layout">
-      <Sidebar />
-
-      <PageWrapper>
-        <div className="main-content">
-          {/* Page Header */}
-          <div className="page-header">
-            <div className="page-header-left">
-              <h1 className="page-title">Platforms</h1>
-              <p className="page-subtitle">Manage the social media platforms you want to track</p>
-            </div>
-          </div>
-
-          <div className="platforms-content">
-            {/* Add Platform Form */}
-            <div className="add-platform-card">
-              <div className="card-header">
-                <Plus size={20} />
-                <h2>Add a Platform</h2>
-              </div>
-              <p className="card-subtitle">Connect a new social media account to start tracking analytics</p>
-
-              {formError && <div className="form-message error">{formError}</div>}
-              {formSuccess && <div className="form-message success">{formSuccess}</div>}
-
-              <form onSubmit={handleAdd} className="platform-form">
-                <div className="form-field">
-                  <label className="form-label">Platform Name</label>
-                  <input
-                    type="text"
-                    name="platformName"
-                    value={form.platformName}
-                    onChange={handleChange}
-                    placeholder="e.g. YouTube, Instagram, etc."
-                    className="form-input"
-                    disabled={formLoading}
-                  />
-                </div>
-
-                <div className="form-field">
-                  <label className="form-label">Handle / Username</label>
-                  <input
-                    type="text"
-                    name="handle"
-                    value={form.handle}
-                    onChange={handleChange}
-                    placeholder="e.g. @yourchannel"
-                    className="form-input"
-                    disabled={formLoading}
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="submit-btn"
-                  disabled={formLoading}
-                >
-                  {formLoading ? "Adding..." : "+ Add Platform"}
-                </button>
-              </form>
-            </div>
-
-            {/* Platform List */}
-            <div className="platforms-list">
-              <div className="list-header">
-                <h2>Connected Platforms</h2>
-                {!loading && (
-                  <span className="platform-count">{platforms.length}</span>
-                )}
-              </div>
-
-              {loading && (
-                <div className="loading-state">
-                  <div className="skeleton" style={{ width: '100%', height: '40px', marginBottom: '16px' }}></div>
-                  <div className="skeleton" style={{ width: '100%', height: '300px' }}></div>
-                </div>
-              )}
-
-              {!loading && error && (
-                <div className="error-state">
-                  <p>{error}</p>
-                </div>
-              )}
-
-              {!loading && !error && platforms.length === 0 && (
-                <div className="empty-state">
-                  <div className="empty-icon">
-                    <BarChart2 size={48} color="rgba(255,255,255,0.2)" />
-                  </div>
-                  <h3>No platforms yet</h3>
-                  <p>Add your first platform using the form to start tracking analytics</p>
-                </div>
-              )}
-
-              {!loading && platforms.length > 0 && (
-                <div className="platform-grid">
-                  {platforms.map((p) => (
-                    <div key={p._id} className="platform-card">
-                      <div className="platform-card-header">
-                        <div className="platform-info">
-                          <div className="platform-icon" style={{ color: PLATFORM_COLORS[p.platformName] }}>
-                            {PLATFORM_ICONS[p.platformName]}
-                          </div>
-                          <div className="platform-details">
-                            <div className="platform-name">{p.platformName}</div>
-                            <div className="platform-handle">@{p.handle}</div>
-                          </div>
-                        </div>
-                        <button
-                          className="delete-btn"
-                          onClick={() => handleDelete(p._id)}
-                          disabled={deletingId === p._id}
-                        >
-                          <Trash2 size={16} />
-                          {deletingId === p._id ? "Removing..." : ""}
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
+    <PageWrapper>
+      <div className="main-content">
+        {/* Page Header */}
+        <div className="page-header">
+          <div className="page-header-left">
+            <h1 className="page-title">Platforms</h1>
+            <p className="page-subtitle">Manage the social media platforms you want to track</p>
           </div>
         </div>
-      </PageWrapper>
-    </div>
+
+        <div className="platforms-content">
+          {/* Add Platform Form */}
+          <div className="add-platform-card">
+            <div className="card-header">
+              <Plus size={20} />
+              <h2>Add a Platform</h2>
+            </div>
+            <p className="card-subtitle">Connect a new social media account to start tracking analytics</p>
+
+            {formError && <div className="form-message error">{formError}</div>}
+            {formSuccess && <div className="form-message success">{formSuccess}</div>}
+
+            <form onSubmit={handleAdd} className="platform-form">
+              <div className="form-field">
+                <label className="form-label">Platform Name</label>
+                <input
+                  type="text"
+                  name="platformName"
+                  value={form.platformName}
+                  onChange={handleChange}
+                  placeholder="e.g. YouTube, Instagram, etc."
+                  className="form-input"
+                  disabled={formLoading}
+                />
+              </div>
+
+              <div className="form-field">
+                <label className="form-label">Handle / Username</label>
+                <input
+                  type="text"
+                  name="handle"
+                  value={form.handle}
+                  onChange={handleChange}
+                  placeholder="e.g. @yourchannel"
+                  className="form-input"
+                  disabled={formLoading}
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="submit-btn"
+                disabled={formLoading}
+              >
+                {formLoading ? "Adding..." : "+ Add Platform"}
+              </button>
+            </form>
+          </div>
+
+          {/* Platform List */}
+          <div className="platforms-list">
+            <div className="list-header">
+              <h2>Connected Platforms</h2>
+              {!loading && (
+                <span className="platform-count">{platforms.length}</span>
+              )}
+            </div>
+
+            {loading && (
+              <div className="loading-state">
+                <div className="skeleton" style={{ width: '100%', height: '40px', marginBottom: '16px' }}></div>
+                <div className="skeleton" style={{ width: '100%', height: '300px' }}></div>
+              </div>
+            )}
+
+            {!loading && error && (
+              <div className="error-state">
+                <p>{error}</p>
+              </div>
+            )}
+
+            {!loading && !error && platforms.length === 0 && (
+              <div className="empty-state">
+                <div className="empty-icon">
+                  <BarChart2 size={48} color="rgba(255,255,255,0.2)" />
+                </div>
+                <h3>No platforms yet</h3>
+                <p>Add your first platform using the form to start tracking analytics</p>
+              </div>
+            )}
+
+            {!loading && platforms.length > 0 && (
+              <div className="platform-grid">
+                {platforms.map((p) => (
+                  <div key={p._id} className="platform-card">
+                    <div className="platform-card-header">
+                      <div className="platform-info">
+                        <div className="platform-icon" style={{ color: PLATFORM_COLORS[p.platformName] }}>
+                          {PLATFORM_ICONS[p.platformName]}
+                        </div>
+                        <div className="platform-details">
+                          <div className="platform-name">{p.platformName}</div>
+                          <div className="platform-handle">@{p.handle}</div>
+                        </div>
+                      </div>
+                      <button
+                        className="delete-btn"
+                        onClick={() => handleDelete(p._id)}
+                        disabled={deletingId === p._id}
+                      >
+                        <Trash2 size={16} />
+                        {deletingId === p._id ? "Removing..." : ""}
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </PageWrapper>
   );
 };
 

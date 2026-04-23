@@ -28,11 +28,7 @@ body {
   padding: 0;
 }
 
-/* ─── SHARED LAYOUT WRAPPERS ─────────────────────────────────────────────────
-   BUG FIX: these classes were used in JSX but never defined, causing no layout.
-   Sidebar is position:fixed so these just need min-height. The .main-content
-   class in Sidebar.css handles the margin-left offset.
-──────────────────────────────────────────────────────────────────────────── */
+/* ─── SHARED LAYOUT WRAPPERS ─────────────────────────────────────────────── */
 
 .dashboard-layout,
 .analytics-layout,
@@ -41,41 +37,37 @@ body {
   background: var(--bg-base);
 }
 
-/* ─── SHARED PAGE HEADER ─────────────────────────────────────────────────────
-   BUG FIX: .page-header, .page-title, .page-subtitle were used in Dashboard.jsx
-   but only defined in Analytics.css (which Dashboard didn't import).
-   Moved here so all pages can use them.
-──────────────────────────────────────────────────────────────────────────── */
+/* ─── SHARED PAGE HEADER ─────────────────────────────────────────────────── */
 
 .page-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 2rem;
+  /* Reduced top margin so page title sits closer to the fixed header */
+  margin-bottom: 1.5rem;
 }
 
 .page-header-left {
   flex: 1;
 }
 
+/* Larger, more prominent page title */
 .page-title {
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
   margin-bottom: 4px;
+  margin-top: 0;
   color: var(--text-primary);
 }
 
 .page-subtitle {
-  font-size: 12px;
+  font-size: 13px;
   color: rgba(255, 255, 255, 0.4);
   margin: 0;
 }
 
-/* ─── LIVE INDICATOR ─────────────────────────────────────────────────────────
-   BUG FIX: .live-indicator and .live-dot were used in Dashboard.jsx
-   but never defined anywhere.
-──────────────────────────────────────────────────────────────────────────── */
+/* ─── LIVE INDICATOR ─────────────────────────────────────────────────────── */
 
 .live-indicator {
   display: flex;
@@ -87,6 +79,7 @@ body {
   padding: 6px 12px;
   border: 1px solid var(--border-subtle);
   border-radius: 100px;
+  align-self: center;
 }
 
 .live-dot {
@@ -97,9 +90,7 @@ body {
   animation: pulse 2s ease-in-out infinite;
 }
 
-/* ─── SHARED CHART CARD STYLES ───────────────────────────────────────────────
-   Shared between Dashboard and Analytics
-──────────────────────────────────────────────────────────────────────────── */
+/* ─── SHARED CHART CARD STYLES ───────────────────────────────────────────── */
 
 .chart-card {
   background: var(--bg-card);
@@ -142,7 +133,7 @@ body {
   flex-shrink: 0;
 }
 
-/* ─── PLATFORM BREAKDOWN (Dashboard) ─────────────────────────────────────── */
+/* ─── PLATFORM BREAKDOWN (Dashboard) ────────────────────────────────────── */
 
 .platform-breakdown {
   margin-top: 0;
@@ -310,13 +301,8 @@ body {
 /* ─── SKELETON SHIMMER ───────────────────────────────────────────────────── */
 
 @keyframes shimmer {
-  from {
-    background-position: -800px 0;
-  }
-
-  to {
-    background-position: 800px 0;
-  }
+  from { background-position: -800px 0; }
+  to   { background-position: 800px 0; }
 }
 
 .skeleton {
@@ -327,15 +313,6 @@ body {
 }
 
 @keyframes pulse {
-
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  50% {
-    opacity: 0.4;
-    transform: scale(0.7);
-  }
+  0%,  100% { opacity: 1; transform: scale(1);   }
+  50%        { opacity: 0.4; transform: scale(0.7); }
 }
